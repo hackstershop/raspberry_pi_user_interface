@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<title>graphic user interface for the raspberry pi</title>
+<style>
+body{
+color:white;
+background-image:url("http://i.imgur.com/49G7YDA.jpg");    
+}
+#content{
+    margin-left:2%;
+}
+h1{
+    text-align:left;
+}    
+button{
+    font-size:3em;
+}
+#temp{
+    font-size:2em;
+}
+</style>
+</head>
+<body>
+<h1>ממשק משתמש לרספברי פיי</h1>
+<div id="content">
+<p><button id="led_on" type="button">הדלקת נורה</button></p>
+</p><button id="led_off" type="button">כיבוי נורה</button></p>
+<br><br><br>
+<div id="log"></div>
+<br><br><br>
+<div id="temp"></div>
+</div>
+</body>
+</html>
+<script>
+$.get('temp.php',function(data){
+    $('#temp').html(data)
+})
+setInterval(function(){ 
+$.get('temp.php',function(data){
+    $('#temp').html(data)
+})
+}, 10000);
+
+//$.get('temp.php',function(data){
+  //  $('#temp').html(data)
+//})
+
+$("#led_on").on('click',function(){
+$.get('led_on.php',function(data){
+    $('#log').html("led_on ok")
+    })
+})
+
+$("#led_off").on('click',function(){
+$.get('led_off.php',function(data){
+    $('#log').html("led_off ok")
+    })
+})
+
+
+
+</script>
